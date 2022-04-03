@@ -1,0 +1,70 @@
+extends ../layout/base 
+block content 
+	section.content-header 
+		h1 
+			| Edit Produk
+			small menu for editing produk data
+		ol.breadcrumb 
+			li 
+				a(href='#') 
+					i.fa.fa-dashboard
+					| Level 
+			li.active Here 
+	section.content
+		.box
+			.box-header.with-border
+				h3.box-title
+					| Produk
+				.box-tools.pull-right
+					button(type='button', data-widget='collapse', data-toggle='tooltip',title='collapse').btn.btn-box-tool
+						i.fa.fa-minus
+					
+			.box-body
+				form(role='form',method='post' action='/produks/edit/#{(id==undefined) ? data.id : id}')
+					.row
+						
+						.col-xs-6
+							.box-body
+								- if (messages.msg_error) 
+									.alert.alert-danger.alert-dismissable 
+										button.close(type='button', data-dismiss='alert', aria-hidden='true') 
+											| ×
+										h4
+											i.icon.fa.fa-ban
+											| Alert! 
+										| !{messages.msg_error}
+								- if (messages.msg_info) 
+									.alert.alert-success.alert-dismissable 
+										button.close(type='button', data-dismiss='alert', aria-hidden='true') 
+											| ×
+										h4
+											i.icon.fa.fa-ban
+											| Success! 
+										| !{messages.msg_info}
+								.form-group
+									label
+										| Name
+									input(type='text',value="#{data.name}",name='name',placeholder='Enter Name', autofocus).form-control
+								.form-group
+									label
+										| Deskripsi
+									input(type='text',value="#{ (deskripsi == undefined) ? data.deskripsi : deskripsi }",name='deskripsi',placeholder='Enter deskripsi').form-control
+								.form-group
+									label
+										| Merk
+									input(type='text',value="#{ (merk == undefined) ? data.merk : merk }",name='merk',placeholder='Enter Merk').form-control
+								.form-group
+									label
+										| Stok
+									input(type='text',value="#{ (stok == undefined) ? data.stok : stok }",name='stok',placeholder='Enter stok').form-control
+								.form-group
+									label
+										| Harga
+									input(type='text',value="#{ (harga == undefined) ? data.harga : harga }",name='harga',placeholder='Enter harga').form-control
+							.box-footer
+								input(type="hidden",name="_method", value="PUT")
+								button(type='submit').btn.btn-primary
+									i.fa.fa-pencil 
+									|  Edit
+								a(href='/produks').btn.btn-primary.pull-right
+									| Back
